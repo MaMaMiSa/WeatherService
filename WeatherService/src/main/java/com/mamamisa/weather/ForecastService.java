@@ -47,7 +47,7 @@ public class ForecastService {
   
     @WebMethod(operationName = "getTemperature")
     public Integer getTemperature(@WebParam(name = "location") String txt) {
-        int n = (int)(Math.random() * ((100 - 0) + 1)) + 0;
+        int n = (int)(Math.random() * ((40 - (-15)) + 1)) + (-15);
         return n;
     }    
     
