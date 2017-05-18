@@ -70,7 +70,9 @@ ugin-2.6.pom
 [INFO] ------------------------------------------------------------------------
 ```
 
-5) Run the project : Right-click on the project and choose Run. A Web Browser should open :
-![alt text](https://github.com/MaMaMiSa/WeatherService/raw/master/gui.png "Web Service")
+5) Run the project : Right-click on the project and choose Run. 
+
+A Web Browser should open at http://localhost:8080/WeatherService/# :
+![]( WeatherService/gui.png "Web Service")
 
 
