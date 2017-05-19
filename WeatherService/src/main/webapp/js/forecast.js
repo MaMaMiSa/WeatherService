@@ -56,25 +56,36 @@
 			
 			var forecast_cb = function (res) {
 				
-				if(res == "Fog") {
-					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-1.svg" alt="" width=90>';			
+				if(res == "Thunderstorm") { 
+					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-12.svg" alt="" width=90>';			
 				}
-				else if(res == "Snow") {
-					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-2.svg" alt="" width=90>';			
-				}
-				else if(res == "Sun") {
-					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-3.svg" alt="" width=90>';			
-				}
-				else if(res == "Cloud") {
-					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-4.svg" alt="" width=90>';			
+				else if(res == "Drizzle") { 
+					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-10.svg" alt="" width=90>';			
 				}
 				else if(res == "Rain") {
+					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-9.svg" alt="" width=90>';			
+				}
+				else if(res == "Snow") { 
+					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-14.svg" alt="" width=90>';			
+				}
+				else if(res == "Rain") { 
 					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-5.svg" alt="" width=90>';			
 				}
-				else if(res == "ThunderStorm") {
+				else if(res == "Atmosphere"){
+					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-7.svg" alt="" width=90>';			
+				}
+                                else if(res == "Clear"){
+					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-2.svg" alt="" width=90>';			
+				}		
+                                else if(res == "Clouds"){
 					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-6.svg" alt="" width=90>';			
 				}
-				else {}			
+                                else if(res == "Extreme"){
+					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-8.svg" alt="" width=90>';			
+				}	
+                                else if(res == "Additional"){
+					document.getElementById("div_forecast").innerHTML = '<img src="images/icons/icon-8.svg" alt="" width=90>';			
+				}	
 			}
 			
 			var humidity_cb = function (res) {
