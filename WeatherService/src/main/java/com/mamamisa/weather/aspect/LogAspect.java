@@ -1,4 +1,4 @@
-package com.mamisami.weather.aspect;
+package com.mamamisa.weather.aspect;
 
 import com.mamamisa.weather.ForecastService;
 import java.io.File;
@@ -31,11 +31,14 @@ public class LogAspect {
     @After("onExit()")
     public void theEnd(JoinPoint joinPoint){
         System.out.println("theEnd");
-        String filename= "MyFile.txt";
+        Object[] arguments = joinPoint.getArgs();
+
+        String filename= "requests.log";
         FileWriter fw;
         try {
             fw = new FileWriter(filename,true); //the true will append the new data    
-            fw.write("add a line\n");//appends the string to the file
+            fw.write(arguments[0].toString());//appends the string to the file
+            // File is located into : [Glassfish root folder]/glassfish/domains/domain1/config/requests.log
             fw.close();
         } catch (IOException ex) {
             Logger.getLogger(LogAspect.class.getName()).log(Level.SEVERE, null, ex);
