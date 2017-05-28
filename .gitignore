@@ -1,2 +1,5 @@
 # Maven
 target/
+
+# Other files
+app.properties
