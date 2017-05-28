@@ -1,11 +1,19 @@
-﻿# WeatherService
+# WeatherService
 
-This web service was developed in Java. It gives weather forecasts whose data are generated randomly.
+This web service was developed in Java. It gives weather forecasts using the OpenWeatherMap API.
 
 ## Resources
-[Weather API](https://openweathermap.org/)
+[OpenWeatherMap API](https://openweathermap.org/)
 
-## Build project with Maven and Git only
+## Instructions
+
+### Setup the API key
+
+Navigate to `src/main/webapp/WEB-INF/`\
+Rename `app.properties.sample` to `app.properties`\
+Open the file and replace `YOUR_API_KEY` by your OpenWeatherMap API key.
+
+### Build project with Maven and Git only
 
 This assumes you have Maven 3+ and Git installed.
 
@@ -37,7 +45,7 @@ ugin-2.6.pom
 [INFO] Final Memory: 23M/285M
 [INFO] ------------------------------------------------------------------------
 ```
-## Build project with Maven, Git and Netbeans
+### Build project with Maven, Git and Netbeans
 
 This assumes you have Maven 3+, Git and Netbeans installed.
 
