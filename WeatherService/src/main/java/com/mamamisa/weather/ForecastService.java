@@ -8,12 +8,20 @@ package com.mamamisa.weather;
 import com.mamamisa.weather.http.HTTPRequest;
 import com.mamamisa.weather.http.HTTPRequestMethod;
 import com.mamamisa.weather.http.HTTPRequestResult;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.servlet.ServletContext;
 import jdk.nashorn.internal.runtime.Debug;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,8 +45,8 @@ import org.json.JSONObject;
 @WebService(serviceName = "ForecastService")
 public class ForecastService {
     
-    String url = "http://api.openweathermap.org/data/2.5/weather?appid=???&q=";
-    
+    String key = this.getAPIKey();
+    String url = "http://api.openweathermap.org/data/2.5/weather?appid=" + key + "&q=";
     
     class Information {
         Integer temperature;
@@ -51,6 +59,17 @@ public class ForecastService {
     Information lastInformation;
     String lastLocation;
     
+    private String getAPIKey() {
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("../app.properties");
+        Properties properties = new Properties();
+        try {
+            properties.load(is);
+            return properties.getProperty("openweathermap_api_key");
+        } catch (IOException ex) {
+            Logger.getLogger(ForecastService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
     public void actualizeInformation(String location){
         if(this.lastLocation != location){
             HTTPRequest httpReqGetSection = new HTTPRequest();
