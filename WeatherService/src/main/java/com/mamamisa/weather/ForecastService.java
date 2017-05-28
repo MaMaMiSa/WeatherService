@@ -10,10 +10,7 @@ import com.mamamisa.weather.http.HTTPRequestMethod;
 import com.mamamisa.weather.http.HTTPRequestResult;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -21,21 +18,13 @@ import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.servlet.ServletContext;
-import jdk.nashorn.internal.runtime.Debug;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Description : 
- * The SOAP service developed allows to display particular conditions 
- * (temperature, ventilation, sun, pressure, humidity).
- * 
- * The service will look for different values on different sites : 
- * - google api
- * 
- * We hypothesize that some sites are better for temperature or wind, etc.
+ * This SOAP service allows to display particular conditions 
+ * (temperature, wind speed and direction, sun, pressure, humidity).
  * 
  * Author : Michael Polla
  * Author : Magali Fröhlich
@@ -50,8 +39,8 @@ public class ForecastService {
     
     class Information {
         Integer temperature;
-        Integer ventilationSpeed;
-        String ventilationOrigin;
+        Integer windSpeed;
+        String windDirection;
         String forecast;
         Integer humidity;
     }
@@ -82,10 +71,10 @@ public class ForecastService {
                 this.lastInformation.humidity = (int)Math.round(main.getDouble("humidity"));
 
                 JSONObject wind = resultReq.jsonObject.getJSONObject("wind");
-                this.lastInformation.ventilationSpeed = (int)Math.round(wind.getDouble("speed"));
+                this.lastInformation.windSpeed = (int)Math.round(wind.getDouble("speed"));
                 Integer deg = wind.getInt("deg");
                 String directions[] = {"North", "North East", "East", "South East", "South", "South West", "West", "North West"};
-                this.lastInformation.ventilationOrigin = directions[ (int)Math.round(((double)(deg)) / 45) ];
+                this.lastInformation.windDirection = directions[ (int)Math.round(((double)(deg)) / 45) ];
                 this.lastInformation.forecast = resultReq.jsonObject.getJSONArray("weather").getJSONObject(0).getString("main");
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -116,16 +105,16 @@ public class ForecastService {
         return this.lastInformation.temperature;
     }    
     
-    @WebMethod(operationName = "getVentilationSpeed")
-    public Integer getVentilationSpeed(@WebParam(name = "location") String txt) {
+    @WebMethod(operationName = "getWindSpeed")
+    public Integer getWindSpeed(@WebParam(name = "location") String txt) {
         this.actualizeInformation(txt);
-        return this.lastInformation.ventilationSpeed;
+        return this.lastInformation.windSpeed;
     }
 
-    @WebMethod(operationName = "getVentilationOrigin")
-    public String getVentilationOrigin(@WebParam(name = "location") String txt) {
+    @WebMethod(operationName = "getWindDirection")
+    public String getWindDirection(@WebParam(name = "location") String txt) {
         this.actualizeInformation(txt);
-        return this.lastInformation.ventilationOrigin;
+        return this.lastInformation.windDirection;
     }
     
     @WebMethod(operationName = "getForecast")
