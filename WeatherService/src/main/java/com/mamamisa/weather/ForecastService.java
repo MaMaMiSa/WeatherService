@@ -26,7 +26,7 @@ import org.json.JSONObject;
  * This SOAP service allows to display particular conditions 
  * (temperature, wind speed and direction, sun, pressure, humidity).
  * 
- * Author : Michael Polla
+ * Author : Michaël Polla
  * Author : Magali Fröhlich
  * Author : Salvatore Cicciù 
  * Author : Maxime Burri
