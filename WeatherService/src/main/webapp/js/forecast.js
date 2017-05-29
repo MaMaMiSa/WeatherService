@@ -33,15 +33,20 @@
 							'</S:Envelope>';
 					
 			/* Soap message Web service : WeatherService/ForecastService */
-			var sr_day 					= '<ns2:getDay xmlns:ns2="http://weather.mamamisa.com/">' + '</ns2:getDay>';
-			var sr_date					= '<ns2:getDate xmlns:ns2="http://weather.mamamisa.com/">' + '</ns2:getDate>';
-			var sr_temperature 			= '<ns2:getTemperature xmlns:ns2="http://weather.mamamisa.com/">' 		+ p + '</ns2:getTemperature>';
-			var sr_wind_speed 	= '<ns2:getWindSpeed xmlns:ns2="http://weather.mamamisa.com/">' 	+ p + '</ns2:getWindSpeed>';
-			var sr_wind_direction 	= '<ns2:getWindDirection xmlns:ns2="http://weather.mamamisa.com/">' + p + '</ns2:getWindDirection>';
-			var sr_forecast 			= '<ns2:getForecast xmlns:ns2="http://weather.mamamisa.com/">' 			+ p + '</ns2:getForecast>';
-			var sr_humidity 			= '<ns2:getHumidity xmlns:ns2="http://weather.mamamisa.com/">' 			+ p + '</ns2:getHumidity>';
+                        var sr_update_information 	= '<ns2:updateInformation xmlns:ns2="http://weather.mamamisa.com/">' + '</ns2:updateInformation>';
+			var sr_day 			= '<ns2:getDay xmlns:ns2="http://weather.mamamisa.com/">' + '</ns2:getDay>';
+			var sr_date			= '<ns2:getDate xmlns:ns2="http://weather.mamamisa.com/">' + '</ns2:getDate>';
+			var sr_temperature 		= '<ns2:getTemperature xmlns:ns2="http://weather.mamamisa.com/">' 		+ p + '</ns2:getTemperature>';
+			var sr_wind_speed               = '<ns2:getWindSpeed xmlns:ns2="http://weather.mamamisa.com/">' 	+ p + '</ns2:getWindSpeed>';
+			var sr_wind_direction           = '<ns2:getWindDirection xmlns:ns2="http://weather.mamamisa.com/">' + p + '</ns2:getWindDirection>';
+			var sr_forecast                 = '<ns2:getForecast xmlns:ns2="http://weather.mamamisa.com/">' 			+ p + '</ns2:getForecast>';
+			var sr_humidity                 = '<ns2:getHumidity xmlns:ns2="http://weather.mamamisa.com/">' 			+ p + '</ns2:getHumidity>';
 
 			/* Callback to display the response*/
+                        var update_information_cb = function (res) {
+                            // Not implemented;
+                        }
+                        
 			var day_cb = function (res) {
 				document.getElementById("div_day").innerHTML = res; 
 			};
@@ -101,13 +106,14 @@
 			};
 			
 			/* Send request */
-			 sendSoapRequest(sr_begin + sr_day + sr_end, day_cb);
-			 sendSoapRequest(sr_begin + sr_date + sr_end, date_cb);
-			 sendSoapRequest(sr_begin + sr_temperature + sr_end, temperature_cb);
-			 sendSoapRequest(sr_begin + sr_wind_speed + sr_end, wind_speed_cb);
-			 sendSoapRequest(sr_begin + sr_wind_direction + sr_end, wind_direction_cb);
-			 sendSoapRequest(sr_begin + sr_forecast + sr_end, forecast_cb);
-			 sendSoapRequest(sr_begin + sr_humidity + sr_end, humidity_cb);
+                        sendSoapRequest(sr_begin + sr_update_information + sr_end, update_information_cb);
+			sendSoapRequest(sr_begin + sr_day + sr_end, day_cb);
+			sendSoapRequest(sr_begin + sr_date + sr_end, date_cb);
+			sendSoapRequest(sr_begin + sr_temperature + sr_end, temperature_cb);
+			sendSoapRequest(sr_begin + sr_wind_speed + sr_end, wind_speed_cb);
+			sendSoapRequest(sr_begin + sr_wind_direction + sr_end, wind_direction_cb);
+			sendSoapRequest(sr_begin + sr_forecast + sr_end, forecast_cb);
+			sendSoapRequest(sr_begin + sr_humidity + sr_end, humidity_cb);
 		}
                                 
                 find_forecast = function() {
