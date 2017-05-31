@@ -29,7 +29,7 @@ public class LogAspect {
         try {
             returnValue = proceedingJoinPointe.proceed();
         } catch (Throwable e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
         
         Information info = (Information)returnValue;
